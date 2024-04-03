@@ -1,0 +1,62 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+#d-day-container {
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1.6rem;
+}
+
+.d-day-child-container {
+    text-align: center;
+    margin-right: 1rem;
+}
+
+.d-day-child-container span {
+    font-size: 1.3rem;
+}
+
+#target-selector {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.target-input {
+    width: 10%;
+}
+
+#start-btn {
+    border: none;
+    background-color: orange;
+    font-size: 1.3rem;
+    margin: 0.5rem;
+}
+
+#start-btn:active {
+    color: rgb(0, 0, 0, 0.6);
+}
+
+#reset-btn {
+    border: none;
+    background-color: orange;
+    font-size: 1.3rem;
+}
+
+#reset-btn:active {
+    color: rgb(0, 0, 0, 0.6);
+}
