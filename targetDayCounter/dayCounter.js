@@ -5,8 +5,14 @@ const messageContainer = document.querySelector("#d-day-message");
 container.style.display = "none";
 messageContainer.innerHTML = "<h3>D-Day를 입력해주세요.</h3>";
 
-const output = () => {
-    console.log('환영합니다');
+if (localStorage.getItem("targetDate")) {
+    const targetDate = localStorage.getItem("targetDate");
+
+    timer = setInterval(() => {
+        counterMaker(targetDate);
+    }, 1000);
+} else {
+    console.log("data is null.")
 }
 
 const dateFormMaker = () => {
@@ -41,10 +47,10 @@ const counterMaker = (targetDate) => {
         messageContainer.style.display = "none";
 
         const remainingObj = {
-            days: Math.floor(remaining / 3600 / 24),
-            hours: Math.floor((remaining / 3600) % 24),
-            minutes: Math.floor((remaining / 60) % 60),
-            seconds: Math.floor(remaining % 60)
+            days: String(Math.floor(remaining / 3600 / 24)).padStart(2, "0"),
+            hours: String(Math.floor((remaining / 3600) % 24)).padStart(2, "0"),
+            minutes: String(Math.floor((remaining / 60) % 60)).padStart(2, "0"),
+            seconds: String(Math.floor(remaining % 60)).padStart(2, "0")
         }
         
         const documentObj = {
@@ -66,6 +72,7 @@ const reset = () => {
     messageContainer.style.display = "block";
     messageContainer.innerHTML = "<h3>D-Day를 입력해주세요.</h3>";
 
+    localStorage.removeItem("targetDate");
     clearInterval(timer);
     document.querySelector("#start-btn").disabled = false;
 
@@ -76,15 +83,16 @@ const reset = () => {
 }
 
 const starter = () => {
-    document.querySelector("#start-btn").disabled = true;
+    // document.querySelector("#start-btn").disabled = true;
 
-    const target = document.querySelectorAll(".target-input");
-    for (let i = 0; i < document.querySelectorAll(".target-input").length; i++) {
-        target[i].disabled = true;
-    }
-
+    // const target = document.querySelectorAll(".target-input");
+    // for (let i = 0; i < document.querySelectorAll(".target-input").length; i++) {
+    //     target[i].disabled = true;
+    // }
     const targetDate = dateFormMaker();
+    localStorage.setItem("targetDate", targetDate);
 
+    clearInterval(timer);
     timer = setInterval(() => {
         counterMaker(targetDate);
     }, 1000);
@@ -92,5 +100,5 @@ const starter = () => {
 
 // 테스트 코드
 document.querySelector("#target-year-input").value = "2024";
-document.querySelector("#target-month-input").value = "04";
+document.querySelector("#target-month-input").value = "06";
 document.querySelector("#target-date-input").value = "05";
